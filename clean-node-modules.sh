@@ -12,8 +12,8 @@ NC='\033[0m' # No Color
 # Function 1: List all node_modules sizes in current directory, sorted from largest to smallest, top 10
 list_node_modules() {
     echo ""
-    echo -e "  ${BLUE}Listing top 10 largest node_modules directories:${NC}"
-    echo -e "  ${CYAN}==================================${NC}"
+    echo -e "${BLUE}Listing top 10 largest node_modules directories:${NC}"
+    echo -e "${CYAN}==================================${NC}"
     echo ""
 
     # Find node_modules folders in first-level subdirectories
@@ -24,7 +24,7 @@ list_node_modules() {
             echo "$size $dir"
         fi
     done | sort -nr | head -10 | while read size dir; do
-        printf "    ${YELLOW}%8s MB${NC} - ${GREEN}%s${NC}\n" "$size" "$dir"
+        printf "${YELLOW}%8s MB${NC} - ${GREEN}%s${NC}\n" "$size" "$dir"
     done
     echo ""
 }
@@ -32,8 +32,8 @@ list_node_modules() {
 # Function 2: Delete top 10 largest node_modules directories
 delete_top10_node_modules() {
     echo ""
-    echo -e "  ${RED}Deleting top 10 largest node_modules directories...${NC}"
-    echo -e "  ${CYAN}==================================${NC}"
+    echo -e "${RED}Deleting top 10 largest node_modules directories...${NC}"
+    echo -e "${CYAN}==================================${NC}"
     echo ""
 
     # Get top 10 largest node_modules directories
@@ -45,14 +45,14 @@ delete_top10_node_modules() {
     done | sort -nr | head -10)
 
     if [ -z "$top10_dirs" ]; then
-        echo -e "  ${YELLOW}No node_modules directories found${NC}"
+        echo -e "${YELLOW}No node_modules directories found${NC}"
         return
     fi
 
     # Show what will be deleted
-    echo -e "  ${YELLOW}The following directories will be deleted:${NC}"
+    echo -e "${YELLOW}The following directories will be deleted:${NC}"
     echo "$top10_dirs" | while read size dir; do
-        printf "    ${YELLOW}%8s MB${NC} - ${RED}%s${NC}\n" "$size" "$dir"
+        printf "  ${YELLOW}%8s MB${NC} - ${RED}%s${NC}\n" "$size" "$dir"
     done
     echo ""
 
@@ -61,16 +61,16 @@ delete_top10_node_modules() {
     if [[ $confirm =~ ^[Yy]$ ]]; then
         echo "$top10_dirs" | while read size dir; do
             if [ -n "$dir" ] && [ -d "$dir" ]; then
-                echo -e "    ${RED}Deleting:${NC} $dir"
+                echo -e "  ${RED}Deleting:${NC} $dir"
                 rm -rf "$dir"
             fi
         done
         echo ""
-        echo -e "  ${GREEN}✓ Deletion complete!${NC}"
+        echo -e "${GREEN}✓ Deletion complete!${NC}"
         echo ""
     else
         echo ""
-        echo -e "  ${YELLOW}Deletion cancelled${NC}"
+        echo -e "${YELLOW}Deletion cancelled${NC}"
         echo ""
     fi
 }
@@ -103,12 +103,12 @@ main() {
                 ;;
             3)
                 echo ""
-                echo -e "  ${GREEN}Exiting program${NC}"
+                echo -e "${GREEN}Exiting program${NC}"
                 exit 0
                 ;;
             *)
                 echo ""
-                echo -e "  ${RED}Invalid choice, please enter 1-3${NC}"
+                echo -e "${RED}Invalid choice, please enter 1-3${NC}"
                 echo ""
                 ;;
         esac
